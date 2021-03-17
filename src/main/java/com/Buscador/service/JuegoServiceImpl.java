@@ -3,10 +3,11 @@ package com.Buscador.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.Buscador.dao.IJuegoDAO;
 import com.Buscador.dto.Juego;
-
+@Service
 public class JuegoServiceImpl implements IJuegoService {
 
 	@Autowired

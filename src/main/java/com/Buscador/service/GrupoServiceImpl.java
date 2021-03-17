@@ -3,11 +3,12 @@ package com.Buscador.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.Buscador.dao.IGrupoDAO;
 import com.Buscador.dto.Grupo;
 import com.Buscador.dto.Juego;
-
+@Service
 public class GrupoServiceImpl implements IGrupoService {
 
 	@Autowired
