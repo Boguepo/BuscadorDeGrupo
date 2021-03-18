@@ -23,11 +23,11 @@ public class EsAmigo {
 	
 	@ManyToOne
     @JoinColumn(name = "id_user")
-    Jugador user;
+    private Jugador user;
  
     @ManyToOne
     @JoinColumn(name = "id_amigo")
-    Jugador amigo;
+    private Jugador amigo;
 	
     @Temporal(TemporalType.TIMESTAMP)
 	private Date aceptado;

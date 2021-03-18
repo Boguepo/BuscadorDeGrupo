@@ -23,11 +23,11 @@ public class JugadorGrupo {
 	
 	@ManyToOne
     @JoinColumn(name = "id_user")
-    Jugador jugador;
+    private Jugador jugador;
  
     @ManyToOne
     @JoinColumn(name = "id_grupo")
-    Grupo grupo;
+    private Grupo grupo;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
