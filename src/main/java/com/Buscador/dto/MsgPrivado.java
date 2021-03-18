@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,24 +27,24 @@ public class MsgPrivado {
 	private Date fecha;
 	
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="idUser")
 	private Jugador jugador;
 	
-	@OneToMany
-	@JoinColumn(name="idGrupo")
-	private Grupo grupo;
+	@ManyToOne
+	@JoinColumn(name="idUserDestino")
+	private Jugador jugadorDest;
 	
 	
 	//Constructores
 	public MsgPrivado() {}
 	
-	public MsgPrivado(Long idMpr,String mensaje,Date fecha,Jugador jugador,Grupo grupo) {
+	public MsgPrivado(Long idMpr,String mensaje,Date fecha,Jugador jugador,Jugador jugadorDest) {
 		this.idMpr=idMpr;
 		this.mensaje=mensaje;
 		this.fecha=fecha;
 		this.jugador=jugador;
-		this.grupo=grupo;
+		this.jugadorDest=jugadorDest;
 	}
 
 	/**
@@ -104,19 +104,20 @@ public class MsgPrivado {
 	}
 
 	/**
-	 * @return the grupo
+	 * @return the jugadorDest
 	 */
-	public Grupo getGrupo() {
-		return grupo;
+	public Jugador getJugadorDest() {
+		return jugadorDest;
 	}
 
 	/**
-	 * @param grupo the grupo to set
+	 * @param jugadorDest the jugadorDest to set
 	 */
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
+	public void setJugadorDest(Jugador jugadorDest) {
+		this.jugadorDest = jugadorDest;
 	}
-	
+
+
 	
 	
 }

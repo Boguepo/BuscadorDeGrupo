@@ -14,7 +14,7 @@ public interface IMsgPublicoService {
 	
 	public MsgPublico msgPublicoXID(Long id);
 	
-	public MsgPublico actualizarMsgPrivado(MsgPublico msgPublico);
+	public MsgPublico actualizarMsgPublico(MsgPublico msgPublico);
 	
 	public void borrarMsgPublico(Long id);
 }

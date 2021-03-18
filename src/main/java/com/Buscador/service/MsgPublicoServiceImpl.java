@@ -32,7 +32,7 @@ public class MsgPublicoServiceImpl implements IMsgPublicoService{
 	}
 
 	@Override
-	public MsgPublico actualizarMsgPrivado(MsgPublico msgPublico) {
+	public MsgPublico actualizarMsgPublico(MsgPublico msgPublico) {
 		return imsgPublicoDAO.save(msgPublico);
 	}
 
