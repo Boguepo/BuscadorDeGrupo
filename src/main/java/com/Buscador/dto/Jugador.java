@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name ="jugador")
+@Table(name ="jugadores")
 public class Jugador {
 	//mapeo de la tabla de Jugadores
 	@Id

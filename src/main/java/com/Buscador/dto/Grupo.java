@@ -16,7 +16,7 @@ public class Grupo {
 	//mapeo de la tabla Grupos
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "isGrupo")
+	@Column(name = "idGrupo")
 	private Long id;
 	@Column(name = "nombre")
 	private String nombre;

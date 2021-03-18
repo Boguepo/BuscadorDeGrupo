@@ -28,7 +28,7 @@ public class GrupoController {
 		return grupoService.listarGrupos();
 	}
 	
-	@GetMapping("/grupos")
+	@GetMapping("/gruposJuego")
 	public List<Grupo> listarXjuego(@RequestBody Juego juego){
 		return grupoService.grupoXjuego(juego);
 	}
