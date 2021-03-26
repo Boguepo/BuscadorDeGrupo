@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Buscador.dao.IJugadorGrupoDAO;
+import com.Buscador.dto.Grupo;
+import com.Buscador.dto.Jugador;
 import com.Buscador.dto.JugadorGrupo;
 
 @Service
@@ -42,6 +44,18 @@ public class JugadorGrupoServiceImpl implements IJugadorGrupoService {
 	public void eliminarJugadorGrupo(long id) {
 		// TODO Auto-generated method stub
 		iJugadorGrupoDAO.deleteById(id);
+	}
+
+	@Override
+	public List<JugadorGrupo> userXgrupo(Jugador jugador) {
+		
+		return iJugadorGrupoDAO.findByJugador(jugador);
+	}
+
+	@Override
+	public List<JugadorGrupo> grupoXusers(Grupo grupo) {
+		// TODO Auto-generated method stub
+		return iJugadorGrupoDAO.findByGrupo(grupo);
 	}
 
 }

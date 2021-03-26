@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.Buscador.dao.IEsAmigoDAO;
 import com.Buscador.dto.EsAmigo;
+import com.Buscador.dto.Jugador;
 
 @Service
 public class EsAmigoServiceImpl implements IEsAmigoService {
@@ -43,5 +44,19 @@ public class EsAmigoServiceImpl implements IEsAmigoService {
 		// TODO Auto-generated method stub
 		iEsAmigoDAO.deleteById(id);
 	}
+
+	@Override
+	public List<EsAmigo> listarXJugador(Jugador jugador) {
+		
+		return iEsAmigoDAO.findByUser(jugador);
+	}
+
+	@Override
+	public List<EsAmigo> jugadorXamigo(Jugador jugador) {
+		// TODO Auto-generated method stub
+		return iEsAmigoDAO.findByAmigo(jugador);
+	}
+
+
 
 }

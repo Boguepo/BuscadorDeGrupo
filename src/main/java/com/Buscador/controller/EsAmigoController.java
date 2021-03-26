@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Buscador.dto.EsAmigo;
+import com.Buscador.dto.Jugador;
 import com.Buscador.service.EsAmigoServiceImpl;
 
 
@@ -27,7 +28,16 @@ public class EsAmigoController {
 		return esAmigoServiceImpl.listarEsAmigos();
 	}
 	
-	
+	//Endpoint para listar las solicitudes de amistad que has mandado
+	@GetMapping("/amigoXjugador")
+	public List<EsAmigo> listarXUser(@RequestBody Jugador jugador){
+		return esAmigoServiceImpl.listarXJugador(jugador);
+	}
+	//nos devuelve las solicitudes hechas a 1 user en concreto
+	@GetMapping("/jugadorXamigo")
+	public List<EsAmigo> solicitudAmigo(@RequestBody Jugador jugador){
+		return esAmigoServiceImpl.jugadorXamigo(jugador);
+	}
 	@PostMapping("/esAmigo")
 	public EsAmigo salvarEsAmigo(@RequestBody EsAmigo esAmigo) {
 		
@@ -38,13 +48,7 @@ public class EsAmigoController {
 	@GetMapping("/esAmigo/{id}")
 	public EsAmigo esAmigoXID(@PathVariable(name="id") int id) {
 		
-		EsAmigo EsAmigo_xid= new EsAmigo();
-		
-		EsAmigo_xid=esAmigoServiceImpl.EsAmigoXID(id);
-		
-		System.out.println("EsAmigo XID: "+EsAmigo_xid);
-		
-		return EsAmigo_xid;
+		return esAmigoServiceImpl.EsAmigoXID(id);
 	}
 	
 	@PutMapping("/esAmigo/{id}")
@@ -60,8 +64,7 @@ public class EsAmigoController {
 		EsAmigo_seleccionado.setFecha(esAmigo.getFecha());
 		
 		EsAmigo_actualizado = esAmigoServiceImpl.actualizarEsAmigo(EsAmigo_seleccionado);
-		
-		System.out.println("El EsAmigo actualizado es: "+ EsAmigo_actualizado);
+	
 		
 		return EsAmigo_actualizado;
 	}

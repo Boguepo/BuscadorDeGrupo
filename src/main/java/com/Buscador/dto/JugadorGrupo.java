@@ -13,20 +13,24 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
+
 @Entity
-@Table(name="Jugador_grupo")
+@Table(name="jugadorGrupo")
 public class JugadorGrupo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//busca ultimo valor e incrementa desde id final de db
-	@Column(name="id_jg")
+	@Column(name="idJg")
 	private long id;
 	
 	@ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "idJugador")
+	
     private Jugador jugador;
  
     @ManyToOne
-    @JoinColumn(name = "id_grupo")
+    @JoinColumn(name = "idGrupo")
+  
     private Grupo grupo;
 	
 	@Temporal(TemporalType.TIMESTAMP)

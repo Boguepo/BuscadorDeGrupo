@@ -13,8 +13,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
+
 @Entity
-@Table(name="Es_amigo")
+@Table(name="esAmigo")
 public class EsAmigo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//busca ultimo valor e incrementa desde id final de db
@@ -22,11 +24,13 @@ public class EsAmigo {
 	private long id;
 	
 	@ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "idJugador")
+	
     private Jugador user;
  
     @ManyToOne
-    @JoinColumn(name = "id_amigo")
+    @JoinColumn(name = "idAmigo")
+
     private Jugador amigo;
 	
     @Temporal(TemporalType.TIMESTAMP)
