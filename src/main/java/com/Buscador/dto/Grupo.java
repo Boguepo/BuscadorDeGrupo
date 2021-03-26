@@ -1,14 +1,23 @@
 package com.Buscador.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "grupos")
@@ -22,12 +31,23 @@ public class Grupo {
 	private String nombre;
 	
 	@ManyToOne
-	@JoinColumn(name = "idOwner")
+	@JoinColumn(name = "idJugador")
+
 	private Jugador jugador;
 	
 	@ManyToOne
 	@JoinColumn(name = "idJuego")
 	private Juego juego;
+	
+	@OneToMany
+	@JoinColumn(name = "idGrupo")
+	@Cascade(CascadeType.ALL)
+	private List<MsgPublico> msgPublico;
+	
+	@OneToMany
+	@JoinColumn(name = "idGrupo")
+	@Cascade(CascadeType.ALL)
+	private List<JugadorGrupo> jugadorGrupo;
 	
 	public Grupo() {
 		
@@ -71,5 +91,24 @@ public class Grupo {
 	public void setJuego(Juego juego) {
 		this.juego = juego;
 	}
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "MsgPublico")
+	public List<MsgPublico> getMsgPublico() {
+		return msgPublico;
+	}
+
+	public void setMsgPublico(List<MsgPublico> msgPublico) {
+		this.msgPublico = msgPublico;
+	}
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "JugadorGrupo")
+	public List<JugadorGrupo> getJugadorGrupo() {
+		return jugadorGrupo;
+	}
+
+	public void setJugadorGrupo(List<JugadorGrupo> jugadorGrupo) {
+		this.jugadorGrupo = jugadorGrupo;
+	}
+	
 	
 }

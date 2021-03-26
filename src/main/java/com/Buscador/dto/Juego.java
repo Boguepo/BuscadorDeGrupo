@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -31,11 +34,10 @@ public class Juego {
 	
 	@OneToMany
 	@JoinColumn(name = "idJuego")
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<Grupo> grupo;
 	
-	@OneToMany
-	@JoinColumn(name = "idJuego")
-	private List<MsgPublico> msgPublico;
+	
 	
 	public Juego() {
 		
@@ -47,7 +49,7 @@ public class Juego {
 		this.thumbnail = thumbnail;
 		this.url = url;
 		this.grupo = grupo;
-		this.msgPublico = msgPublico;
+		
 	}
 
 	public Long getId() {
@@ -90,15 +92,7 @@ public class Juego {
 	public void setGrupo(List<Grupo> grupo) {
 		this.grupo = grupo;
 	}
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "MsgPublico")
-	public List<MsgPublico> getMsgPublico() {
-		return msgPublico;
-	}
 
-	public void setMsgPublico(List<MsgPublico> msgPublico) {
-		this.msgPublico = msgPublico;
-	}
 	
 	
 	

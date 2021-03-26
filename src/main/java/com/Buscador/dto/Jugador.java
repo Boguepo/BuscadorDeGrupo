@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -33,32 +36,41 @@ public class Jugador {
 	@Column(name = "steamId")
 	private String steamId;
 	
+	
+	//los @Cascade son para representar las reelaciones de las claves foraneas
 	@OneToMany
 	@JoinColumn(name = "idJugador")
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<Grupo> grupo;
 	
 	@OneToMany
 	@JoinColumn(name = "idJugador")
+	@Cascade(CascadeType.ALL)
 	private List<JugadorGrupo> jugadorGrupo;
 	
 	@OneToMany
 	@JoinColumn(name = "idJugador")
+	@Cascade(CascadeType.ALL)
 	private List<EsAmigo> peticion;// referente a id_user de la tabla es_amigo
 	
 	@OneToMany
 	@JoinColumn(name = "idJugador")
+	@Cascade(CascadeType.ALL)
 	private List<EsAmigo> peticionDestino;//referente a id_amigo de la tabla es_amigo
 	
 	@OneToMany
 	@JoinColumn(name = "idJugador")
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<MsgPrivado> mensajePrivado;//referentea a id_user de la tabla msgPrivado
 	
 	@OneToMany
 	@JoinColumn(name = "idJugador")
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<MsgPrivado> mensajePrivadoDestino;//referente a id_userDestino de la tabla msgPrivado
 	
 	@OneToMany
 	@JoinColumn(name = "idJugador")
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<MsgPublico> mensajePublico;
 	
 	public Jugador() {
