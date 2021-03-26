@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Buscador.dao.IMsgPrivadoDAO;
+import com.Buscador.dto.Jugador;
 import com.Buscador.dto.MsgPrivado;
 
 @Service
@@ -38,6 +39,18 @@ public class MsgPrivadoServiceImpl implements IMsgPrivadoService {
 	@Override
 	public void borrarMsgPrivado(Long id) {
 		imsgPrivadoDAO.deleteById(id);
+	}
+
+	@Override
+	public List<MsgPrivado> remitente(Jugador Jugador) {
+		// TODO Auto-generated method stub
+		return imsgPrivadoDAO.findByJugador(Jugador);
+	}
+
+	@Override
+	public List<MsgPrivado> destino(Jugador Jugador) {
+		// TODO Auto-generated method stub
+		return imsgPrivadoDAO.findByJugadorDest(Jugador);
 	}
 
 }

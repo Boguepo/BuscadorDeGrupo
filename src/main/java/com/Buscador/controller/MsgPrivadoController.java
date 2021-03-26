@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Buscador.dto.Jugador;
 import com.Buscador.dto.MsgPrivado;
 import com.Buscador.service.MsgPrivadoServiceImpl;
 
@@ -22,9 +23,19 @@ public class MsgPrivadoController {
 	@Autowired
 	MsgPrivadoServiceImpl msgPrivadoService;
 	
-	@GetMapping("/msgPrivado")
+	@GetMapping("/msgPrivados")
 	public List<MsgPrivado> listarMsgPrivados(){
 		return msgPrivadoService.listarMsgPrivados();
+	}
+	//nos devuelve todos los mensajes que ha mandado 1 user en concreto
+	@GetMapping("/remite")
+	public List<MsgPrivado> remitente(@RequestBody Jugador jugador){
+		return msgPrivadoService.remitente(jugador);
+	}
+	//nos devuelve todos los mensajes que le han mandado a 1 jugador en concreto
+	@GetMapping("/destino")
+	public List<MsgPrivado> destino(@RequestBody Jugador jugador){
+		return msgPrivadoService.destino(jugador);
 	}
 	
 	@PostMapping("/msgPrivado")

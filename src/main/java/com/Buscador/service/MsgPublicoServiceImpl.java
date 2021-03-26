@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Buscador.dao.IMsgPublicoDAO;
+import com.Buscador.dto.Grupo;
 import com.Buscador.dto.MsgPublico;
 
 
@@ -39,6 +40,12 @@ public class MsgPublicoServiceImpl implements IMsgPublicoService{
 	@Override
 	public void borrarMsgPublico(Long id) {
 		imsgPublicoDAO.deleteById(id);
+	}
+
+	@Override
+	public List<MsgPublico> msgXgrupo(Grupo grupo) {
+		// TODO Auto-generated method stub
+		return imsgPublicoDAO.findByGrupo(grupo);
 	}
 	
 

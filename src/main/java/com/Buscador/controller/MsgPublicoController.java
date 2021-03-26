@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Buscador.dto.Grupo;
 import com.Buscador.dto.MsgPublico;
 import com.Buscador.service.MsgPublicoServiceImpl;
 
@@ -22,11 +23,15 @@ public class MsgPublicoController {
 	@Autowired
 	MsgPublicoServiceImpl msgPublicoService;
 	
-	@GetMapping("/msgPublico")
+	@GetMapping("/msgPublicos")
 	public List<MsgPublico> listarMsgPublicos(){
 		return msgPublicoService.listarMsgPublicos();
 	}
-	
+	//nos devuelve todos los mensajes que hay en 1 grupo en concreto
+	@GetMapping("/msgGrupo")
+	public List<MsgPublico> msgGrupo(@RequestBody Grupo grupo){
+		return msgPublicoService.msgXgrupo(grupo);
+	}
 	@PostMapping("/msgPublico")
 	public MsgPublico guardarMsgPublico(@RequestBody MsgPublico msgPublico) {
 		return msgPublicoService.guardarMsgPublico(msgPublico);
