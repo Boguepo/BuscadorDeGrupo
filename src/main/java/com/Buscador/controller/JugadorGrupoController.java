@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Buscador.dto.Grupo;
+import com.Buscador.dto.Jugador;
 import com.Buscador.dto.JugadorGrupo;
 import com.Buscador.service.JugadorGrupoServiceImpl;
 
@@ -28,6 +30,16 @@ public class JugadorGrupoController {
 		return jugadorGrupoServiceImpl.listarJugadorGrupo();
 	}
 	
+	//nos devuelve los grupos donde esta 1 jugador
+	@GetMapping("/jugadorEnGrupo")
+	public List<JugadorGrupo> jugadorEnGrupo(@RequestBody Jugador jugador){
+		return jugadorGrupoServiceImpl.userXgrupo(jugador);
+	}
+	//nos devuelve todos los usuarios de 1 grupo en concreto
+	@GetMapping("/grupoXjugador")
+	public List<JugadorGrupo> grupoXjugador(@RequestBody Grupo grupo){
+		return jugadorGrupoServiceImpl.grupoXusers(grupo);
+	}
 	
 	@PostMapping("/jugadorGrupo")
 	public JugadorGrupo salvarJugadorGrupo(@RequestBody JugadorGrupo jugadorGrupo) {
