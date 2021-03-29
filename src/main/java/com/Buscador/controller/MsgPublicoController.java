@@ -3,6 +3,7 @@ package com.Buscador.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Buscador.dto.Grupo;
@@ -18,6 +20,7 @@ import com.Buscador.service.MsgPublicoServiceImpl;
 
 
 @RestController
+@CrossOrigin(origins="*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 @RequestMapping("/lfg")
 public class MsgPublicoController {
 	@Autowired
@@ -28,9 +31,11 @@ public class MsgPublicoController {
 		return msgPublicoService.listarMsgPublicos();
 	}
 	//nos devuelve todos los mensajes que hay en 1 grupo en concreto
-	@GetMapping("/msgGrupo")
-	public List<MsgPublico> msgGrupo(@RequestBody Grupo grupo){
-		return msgPublicoService.msgXgrupo(grupo);
+	@GetMapping("/msgGrupo/{id}")
+	public List<MsgPublico> msgGrupo(@PathVariable(name = "id") Long id){
+		Grupo gp = new Grupo();
+		gp.setId(id);
+		return msgPublicoService.msgXgrupo(gp);
 	}
 	@PostMapping("/msgPublico")
 	public MsgPublico guardarMsgPublico(@RequestBody MsgPublico msgPublico) {

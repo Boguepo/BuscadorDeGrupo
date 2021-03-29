@@ -3,6 +3,7 @@ package com.Buscador.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Buscador.dto.Grupo;
@@ -19,6 +21,7 @@ import com.Buscador.service.JugadorGrupoServiceImpl;
 
 
 @RestController
+@CrossOrigin(origins="*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 @RequestMapping("/lfg")
 public class JugadorGrupoController {
 
@@ -31,14 +34,18 @@ public class JugadorGrupoController {
 	}
 	
 	//nos devuelve los grupos donde esta 1 jugador
-	@GetMapping("/jugadorEnGrupo")
-	public List<JugadorGrupo> jugadorEnGrupo(@RequestBody Jugador jugador){
-		return jugadorGrupoServiceImpl.userXgrupo(jugador);
+	@GetMapping("/jugadorEnGrupo/{id}")
+	public List<JugadorGrupo> jugadorEnGrupo(@PathVariable(name = "id") Long id){
+		Jugador jug = new Jugador();
+		jug.setId(id);
+		return jugadorGrupoServiceImpl.userXgrupo(jug);
 	}
 	//nos devuelve todos los usuarios de 1 grupo en concreto
-	@GetMapping("/grupoXjugador")
-	public List<JugadorGrupo> grupoXjugador(@RequestBody Grupo grupo){
-		return jugadorGrupoServiceImpl.grupoXusers(grupo);
+	@GetMapping("/grupoXjugador/{id}")
+	public List<JugadorGrupo> grupoXjugador(@PathVariable(name ="id") Long id){
+		Grupo grp = new Grupo();
+		grp.setId(id);
+		return jugadorGrupoServiceImpl.grupoXusers(grp);
 	}
 	
 	@PostMapping("/jugadorGrupo")

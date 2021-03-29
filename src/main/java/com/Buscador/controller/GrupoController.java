@@ -3,6 +3,7 @@ package com.Buscador.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Buscador.dto.Grupo;
@@ -17,6 +19,7 @@ import com.Buscador.dto.Juego;
 import com.Buscador.service.GrupoServiceImpl;
 
 @RestController
+@CrossOrigin(origins="*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 @RequestMapping("/lfg")
 public class GrupoController {
 
@@ -30,7 +33,12 @@ public class GrupoController {
 	
 	@GetMapping("/gruposJuego")
 	public List<Grupo> listarXjuego(@RequestBody Juego juego){
-		return grupoService.grupoXjuego(juego);
+		Juego juegoB = new Juego();
+		juegoB.setId(juego.getId());
+		juegoB.setTitulo(juego.getTitulo());
+		juegoB.setThumbnail(juego.getThumbnail());
+		juegoB.setUrl(juego.getTitulo());
+		return grupoService.grupoXjuego(juegoB);
 	}
 	
 	@PostMapping("/grupo")

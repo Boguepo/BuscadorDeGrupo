@@ -3,6 +3,7 @@ package com.Buscador.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Buscador.dto.Jugador;
@@ -17,6 +19,7 @@ import com.Buscador.dto.MsgPrivado;
 import com.Buscador.service.MsgPrivadoServiceImpl;
 
 @RestController
+@CrossOrigin(origins="*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 @RequestMapping("/lfg")
 public class MsgPrivadoController {
 
@@ -28,20 +31,24 @@ public class MsgPrivadoController {
 		return msgPrivadoService.listarMsgPrivados();
 	}
 	//nos devuelve todos los mensajes que ha mandado 1 user en concreto
-	@GetMapping("/remite")
-	public List<MsgPrivado> remitente(@RequestBody Jugador jugador){
-		return msgPrivadoService.remitente(jugador);
+	@GetMapping("/remite/{id}")
+	public List<MsgPrivado> remitente(@PathVariable(name ="id") Long id){
+		Jugador jug = new Jugador();
+		jug.setId(id);
+		return msgPrivadoService.remitente(jug);
 	}
 	//nos devuelve todos los mensajes que le han mandado a 1 jugador en concreto
-	@GetMapping("/destino")
-	public List<MsgPrivado> destino(@RequestBody Jugador jugador){
-		return msgPrivadoService.destino(jugador);
+	@GetMapping("/destino/{id}")
+	public List<MsgPrivado> destino(@PathVariable(name = "id") Long id){
+		Jugador jug  =  new Jugador();
+		jug.setId(id);
+		return msgPrivadoService.destino(jug);
 	}
 	
 	@PostMapping("/msgPrivado")
 	public MsgPrivado guardarMsgPrivado(@RequestBody MsgPrivado msgPrivado) {
 		return msgPrivadoService.guardarMsgPrivado(msgPrivado);
-	}
+	} 
 	
 	@GetMapping("/msgPrivado/{id}")
 	public MsgPrivado msgPrivadoXID(@PathVariable(name = "id") Long id) {

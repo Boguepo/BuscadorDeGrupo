@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
+
 @Entity
 @Table(name = "msgPublico")
 public class MsgPublico {
@@ -30,7 +32,8 @@ public class MsgPublico {
 	private Date fecha;
 	
 	@ManyToOne
-	@JoinColumn(name="idUser")
+	@JoinColumn(name="idJugador")
+
 	private Jugador jugador;
 	
 	@ManyToOne

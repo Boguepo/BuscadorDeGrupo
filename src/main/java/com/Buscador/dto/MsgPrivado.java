@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 @Entity
 @Table(name = "msgPrivado")
 public class MsgPrivado {
@@ -31,7 +32,7 @@ public class MsgPrivado {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="idUser")
+	@JoinColumn(name="idJugador")
 	private Jugador jugador;
 	
 	@ManyToOne
